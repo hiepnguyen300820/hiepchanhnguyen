@@ -1,10 +1,21 @@
 #include <stdio.h>
 
-int search(int numbers[], int low, int high, int value) 
-{
-	return -1;
+int search(int numbers[], int low, int high, int value) {
+    if (low > high) {//base case return -1
+        return -1;
+    }
+    int mid = low + (high - low) / 2;	//going halfway between the search range
+    if (numbers[mid] == value) {
+        return mid;
+    }
+    if (low == high && numbers[low] == value) {//Low==High case returning mid
+        return low;
+    }
+    if (numbers[mid] > value) {//case going left
+        return search(numbers, low, mid - 1, value);
+    }
+    return search(numbers, mid + 1, high, value);//case going right
 }
-
 void printArray(int numbers[], int sz)
 {
 	int i;
